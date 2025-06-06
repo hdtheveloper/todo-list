@@ -1,29 +1,34 @@
-# 📝 To-Do List with PHP & PDO
+<div dir="rtl" align="right">
 
-A simple task management web app (To-Do List) built using **PHP** and **PDO**.
+# 📝 لیست وظایف با PHP و PDO
 
-## 🚀 Features
-- Add, edit, and delete tasks
-- Tasks stored in MySQL database
-- Clean and responsive UI (Bootstrap)
-- Lightweight and easy to deploy
+یک اپلیکیشن ساده مدیریت وظایف (To-Do List) ساخته‌شده با **PHP** و **PDO**.
 
-## 📦 Technologies Used
-- PHP 7.4+
-- MySQL + PDO
-- HTML5 & CSS3
-- Bootstrap 4/5
+## 🚀 امکانات
+- افزودن، ویرایش و حذف وظایف  
+- ذخیره‌سازی وظایف در پایگاه داده MySQL  
+- رابط کاربری تمیز و واکنش‌گرا (Bootstrap)  
+- سبک و آسان برای راه‌اندازی  
 
-## ⚙️ How to Run
-1. Import the SQL file into your MySQL database (`db.sql`)
-2. Configure database access in `config/db.php`
-3. Run the project in your local server (e.g. XAMPP)
+## 📦 تکنولوژی‌های استفاده‌شده
+- PHP 7.4 به بالا  
+- MySQL و PDO  
+- HTML5 و CSS3  
+- Bootstrap نسخه 4 یا 5  
 
-## 📷 Screenshot
+## ⚙️ نحوه اجرا
+1. فایل SQL را در پایگاه داده MySQL خود وارد کنید (`db.sql`)  
+2. اطلاعات اتصال به پایگاه داده را در فایل `config/db.php` تنظیم کنید  
+3. پروژه را روی سرور محلی خود (مثل XAMPP) اجرا کنید  
+
+## 📷 تصویر نمونه
 ![demo](screenshot.png)
 
-## 📄 License
-Free to use for learning or portfolio purposes.
+## 📄 مجوز
+استفاده رایگان برای اهداف آموزشی یا استفاده در نمونه‌کار (پورتفولیو) مجاز است.
+
+</div>
+
 
 ---
 
