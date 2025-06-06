@@ -1,6 +1,3 @@
-# todo-list
-A simple task management app (To-Do List) developed using PHP and PDO
-
 # 📝 To-Do List with PHP & PDO
 
 A simple task management web app (To-Do List) built using **PHP** and **PDO**.
