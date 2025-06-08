@@ -1,0 +1,15 @@
+{
+    "name": "hassan/todo",
+    "description": "A simple task manager with(Ajax, php and mysql)",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hassanDarvishi"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "hekmatinasser/verta": "^8.5"
+    }
+}
