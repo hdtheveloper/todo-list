@@ -7,5 +7,5 @@ $database_config = [
 	'user' => 'root',
 	'pass' => '',
 	'db' => 'todo',
-
+  
 ];

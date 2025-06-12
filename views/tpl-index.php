@@ -18,7 +18,7 @@
 
   <!-- bootstrap rtl -->
   <link rel="stylesheet" href="assets/css/bootstrap-rtl.min.css">
-  <!-- template rtl version -->
+  <!-- template rtl version --> 
   <link rel="stylesheet" href="assets/css/custom-style.css">
 
 </head>
@@ -57,81 +57,61 @@
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <ul class="nav nav-pills nav-sidebar flex-column " id="folder_list" data-widget="treeview" role="menu" data-accordion="false">
             <!-- Add icons to the links using the .nav-icon class
-                 with font-awesome or any other icon font library -->
-            <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-dashboard"></i>
-                <p>
-                  داشبوردها
-                  <i class="right fa fa-angle-left"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>داشبورد اول</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>داشبورد دوم</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="fa fa-circle-o nav-icon"></i>
-                    <p>داشبورد سوم</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
+                 with font-awesome or any other icon font library -->	
             <li class="nav-item">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fa fa-file"></i>
-                <p>مستندات</p>
+              <a href="<?php echo BASE_URL ?>" style="float:right;" class="nav-link <?= isset($_GET['folder_id']) ? '' : 'active' ?> ">
+                <i class="fa fa-folder" aria-hidden="true"></i>
+                <p>تمام دسته ها</p>
               </a>
-            </li>
-			<hr>
-			<li class="nav-item">
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#folderModal"><i class="nav-icon fa fa-plus"></i> افزودن فولدر </button>
             </li>
 			
+			<?php foreach($folders as $folder): ?>
+            <li class="nav-item">
+              <a href="?folder_id=<?= $folder->id?>" style="float:right;" class="nav-link <?= (($_GET['folder_id'] ?? null) == $folder->id) ? 'active' : '' ?> ">
+                <i class="fa fa-folder" aria-hidden="true"></i>
+                <p><?= $folder->name; ?></p>
+              </a>
+			  <a href="?delete_folder=<?= $folder->id?>" onclick="return confirm('آیا از حذف آیتم مطمینید؟');">
+			  	<span style="float:left;margin-left: 35px;cursor:pointer;"  class="nav-link">
+				<i class="fa fa-trash" aria-hidden="true"></i>
+				</span>
+				</a>
+            </li>
+			<?php endforeach; ?>
+	
           </ul>
+		  
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#folderModal"><i class="nav-icon fa fa-plus"></i> افزودن دسته بندی </button>
+		  
         </nav>
         <!-- /.sidebar-menu -->
-						<!-- start folder  Modal -->
+			<!-- start folder  Modal -->
 				<div class="modal fade mt-5" id="folderModal" tabindex="-1" aria-labelledby="folderModalLabel" aria-hidden="true">
 				  <div class="modal-dialog">
 					<div class="modal-content">
-					  <div class="modal-header">
-						<h5 class="modal-title" id="folderModalLabel">افزودن فولدر</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
+					  <div class="modal-header"> 
+						<h5 class="modal-title" id="folderModalLabel">افزودن دسته بندی</h5>
 					  </div>
 					  <div class="modal-body">
-						<form>
+
 						  <div class="form-group">
-							<label for="folderName">نام فولدر</label>
-							<input type="text" class="form-control" id="folderName">
+							<label for="newFolderInput">نام دسته</label>
+							<input type="text" class="form-control" id="newFolderInput" name="newFolderInput">
 							<small id="emailHelp" class="form-text text-muted">فولدر به صورت ایجکس به لیست فولدر ها اضافه می شود.</small>
 						  </div>
 
-						  <button type="submit" class="btn btn-primary">افزودن</button>
-						</form>
+						  <button type="button" id="newFolderBtn" class="btn btn-primary">افزودن</button>
+
 					  </div>
 					  <div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+						<button type="button" class="btn btn-warning" data-dismiss="modal">انصراف</button>
 					  </div>
 					</div>
 				  </div>
 				</div>
-				<!-- end folder  Modal -->
+			<!-- end folder  Modal -->
       </div>
     </div>
     <!-- /.sidebar -->
@@ -175,21 +155,18 @@
 					<div class="modal-content">
 					  <div class="modal-header">
 						<h5 class="modal-title" id="taskModalLabel">افزودن تسک</h5>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
 					  </div>
 					  <div class="modal-body">
 						<form>
 						  <div class="form-group">
 							<label for="taskName">تسک</label>
-							<input type="text" class="form-control" id="taskName" value="">
+							<input type="text" class="form-control" id="newTaskInput" name="newTaskInput">
 						  </div>
-						  <button type="submit" class="btn btn-primary">افزودن</button>
+						  <button type="submit" id="newTaskBtn" class="btn btn-primary">افزودن</button>
 						</form>
 					  </div>
 					  <div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">انصراف</button>
+						<button type="button" class="btn btn-warning" data-dismiss="modal">انصراف</button>
 					  </div>
 					</div>
 				  </div>
@@ -198,40 +175,35 @@
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover">
                   <tr>
-                    <th>شماره</th>
-                    <th>کاربر</th>
-                    <th>تاریخ</th>
+                    <th></th>
+                    <th>تسک</th>
+                    <th>تاریخ ایجاد</th>
+                    <th>حذف تسک</th>
                     <th>وضعیت</th>
-                    <th>دلیل</th>
                   </tr>
+				  <?php if( sizeof($tasks)): ?>
+				  <?php foreach($tasks as $task):?>
                   <tr>
-                    <td>183</td>
-                    <td>محمد</td>
-                    <td>11-7-2014</td>
-                    <td><span class="badge badge-success">تایید شده</span></td>
-                    <td>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</td>
+					<td><input type="checkbox" style="cursor:pointer;" data-taskId = <?= $task->id ?> id="isDone" class="isDone" <?= $task->is_done ? 'checked' : '' ; ?>></td>
+                    <td><?= $task->title; ?></td>
+                    <td><span><?= $task->created_at; ?></span></td>
+					<td>
+					<a href="#" class="delete-task" data-task-id="<?= $task->id ?>">
+					  <i class="fa fa-trash" aria-hidden="true"></i>
+					</a>
+					</td>
+					<?php if($task->is_done): ?>
+                    <td><span class="badge badge-success">انجام شده</span></td>
+					<?php else: ?>
+                    <td><span class="badge badge-danger">انجام نشده</span></td>
+					<?php endif; ?>
                   </tr>
-                  <tr>
-                    <td>219</td>
-                    <td>حسام</td>
-                    <td>11-7-2014</td>
-                    <td><span class="badge bg-danger">در حال بررسی</span></td>
-                    <td>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</td>
-                  </tr>
-                  <tr>
-                    <td>657</td>
-                    <td>رضا</td>
-                    <td>11-7-2014</td>
-                    <td><span class="badge badge-primary">تایید شده</span></td>
-                    <td>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</td>
-                  </tr>
-                  <tr>
-                    <td>175</td>
-                    <td>پرهام</td>
-                    <td>11-7-2014</td>
-                    <td><span class="badge badge-danger">رد شده</span></td>
-                    <td>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ</td>
-                  </tr>
+				  <?php endforeach; ?>
+				  <?php else: ?>
+				  <tr>
+                    <td><span class="alert alert-warning">در حال حاضر تسکی برای این فولدر وجود ندارد...</span></td>
+				  </tr>
+				  <?php endif; ?>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -278,5 +250,138 @@
 <script src="assets/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="assets/js/demo.js"></script>
+
+
+	<script>
+	
+	$(document).ready(function(){
+		
+		/*Add Folder*/
+		var btn = $('#newFolderBtn');
+		var input = $('input#newFolderInput');
+		btn.click(function(event){
+			event.preventDefault();
+			
+			$.ajax({
+				url: 'process/ajaxHandeler.php',
+				method: 'post',
+				dataType: 'json', // ⬅ مهم: پاسخ باید JSON باشه
+				data: {action: "addFolder", folderName: input.val()},
+				success: function(response){
+					if(response.status == 1){					
+					   //$('#folder_list').append('<li>aaaa</li>');
+			const newFolderHTML = `
+			<li class="nav-item">
+			  <a href="?folder_id=${response.id}" style="float:right;" class="nav-link">
+				<i class="fa fa-folder" aria-hidden="true"></i>
+				<p>${response.name}</p>
+			  </a>
+			  <a href="?delete_folder=${response.id}">
+				<span style="float:left;margin-left: 35px;cursor:pointer;" class="nav-link">
+				  <i class="fa fa-trash" aria-hidden="true"></i>
+				</span>
+			  </a>
+			</li>
+			`;
+			$('#folder_list').append(newFolderHTML);
+					}else{
+					alert(response.message || "خطا در افزودن فولدر");		
+					}
+				}
+			});
+		});
+		
+		
+		
+		/*Add Task*/
+		
+				var taskBtn = $('#newTaskBtn');
+				var taskInput = $('input#newTaskInput');
+				
+				taskBtn.click(function(event){
+					event.preventDefault();
+					$.ajax({
+						url: 'process/ajaxHandeler.php',
+						method: 'post',
+						//dataType: 'json', // ⬅ مهم: پاسخ باید JSON باشه
+						data: {action : "addTask", folderId : <?= json_encode($_GET['folder_id'] ?? null) ?> , taskTitle: taskInput.val()},
+						success: function(response){ 
+													
+							if(response == 1){
+								location.reload();
+							}else{
+								alert(response.message || "خطا در افزودن تسک!");		
+							}
+						}
+					});
+				});
+		
+		
+			/*check task*/
+				$(document).on('change', '.isDone', function() {
+					const checkbox = $(this);
+					var tId = $(this).attr('data-taskId');
+					const newStatus = checkbox.is(':checked') ? 1 : 0;
+					
+				$.ajax({
+					url: 'process/ajaxHandeler.php',
+					method: 'POST',
+					data: {
+						action: 'doneSwitch',
+						taskId: tId,
+						status: newStatus
+					},
+					success: function(response) {
+						location.reload();
+					},
+					error: function(xhr) {
+						alert('خطا در بروزرسانی وضعیت');
+					}
+				});
+					
+				});
+		
+		// حذف تسک
+		$(document).on('click', '.delete-task', function(e) {
+		  e.preventDefault();
+
+		  if (!confirm('آیا از حذف آیتم مطمئنید؟')) return;
+
+		  const taskId = $(this).data('task-id');
+			const row = $(this).closest('tr');
+		  $.ajax({
+			url: 'process/ajaxHandeler.php',
+			method: 'POST',
+			data: {
+			  action: 'deleteTask',
+			  taskId: taskId
+			},
+			success: function(response) {
+			  try {
+				const res = JSON.parse(response);
+				if (res.status == 1) {
+				    row.fadeOut(300, function () {
+					  $(this).remove();
+					});
+				} else {
+				  alert(res.message || 'حذف انجام نشد');
+				}
+			  } catch(e) {
+				alert('پاسخ نامعتبر از سرور');
+			  }
+			},
+			error: function() {
+			  alert('خطا در ارتباط با سرور');
+			}
+		  });
+		});
+
+		
+		
+		
+		
+	});
+
+	</script>
 </body>
 </html>

@@ -1,8 +1,27 @@
 <?php
 
 include "constants.php";
-include "config.php";
-include "libs/helpers.php";
-include "libs/auth.php";
-include "libs/tasks.php";
-include "vendor/autoload.php";
+include BASE_PATH . "bootstrap/config.php";
+include BASE_PATH . "vendor/autoload.php";
+include BASE_PATH . "libs/helpers.php";
+
+
+
+$dsn = "mysql:dbname=$database_config[db];host=$database_config[host]";
+
+try{
+	
+	$pdo = new PDO($dsn, $database_config['user'], $database_config['pass']);
+	
+} catch(PDOException $e){
+	
+	diePage('Connection failed : '. $e->getMessage()); 
+
+}
+
+
+include BASE_PATH . "libs/auth.php";
+include BASE_PATH . "libs/tasks.php";
+
+
+
