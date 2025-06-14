@@ -3,6 +3,18 @@
 
 include "bootstrap/init.php";
 
+if(isset($_GET['logout'])){
+
+	logOut();
+}
+
+if(!isLoggedIn()){
+	//redirect to Auth form
+	redirect(site_url('auth.php'));
+}
+
+$user = getLoggedInUser();
+
 if(isset($_GET['delete_folder']) && is_numeric($_GET['delete_folder'])){
 	$deletedRows = deletFolder($_GET['delete_folder']);
 	//echo "$deletedRows folders successfully deleted!";

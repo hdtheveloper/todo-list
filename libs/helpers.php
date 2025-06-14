@@ -7,7 +7,7 @@ function getCurrentUrl(){
 }
 
 
-function isAjaxRequest(){
+function isAjaxRequest(){ 
 	
 	if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && 
 	strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == "xmlhttprequest"){
@@ -16,6 +16,13 @@ function isAjaxRequest(){
 	return false;
 }
 
+function site_url($uri = ''){
+	return BASE_URL . $uri;
+}
+function redirect($url){
+	header('location: ' . $url);
+	die();
+}
 
 function diePage($msg){
 	
@@ -35,7 +42,25 @@ function dd($var){
 	die();
 }
 
-
-function site_url($uri = ''){
-	BASE_URL . $uri;
+function message($msg, $class = "info"){
+		echo "<div class='alert alert-$class ' style='margin: 50px auto;
+  padding: 30px;
+  width: 550px;
+  background: #fdcbac;
+  border-radius: 20px; 
+'>$msg</div>";
 }
+
+function showErrors($errors) {
+    if (empty($errors)) return;
+
+    echo '<div class="alert alert-danger error-messages" style="color: white; padding: 10px; border: 1px solid red;">';
+    echo '<ul>';
+    foreach ($errors as $error) {
+        echo '<li>' . htmlspecialchars($error) . '</li>';
+    }
+    echo '</ul>';
+    echo '</div>';
+}
+
+

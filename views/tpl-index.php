@@ -38,7 +38,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="../../index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <span class="brand-text font-weight-light">لیست وظایف</span>
     </a>
 
@@ -51,7 +51,7 @@
             <img src="assets/img/avatar.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">حسن درویشی</a>
+            <a href="#" class="d-block"><?= $user->name ?? 'user'; ?></a>
           </div>
         </div>
 
@@ -84,6 +84,8 @@
           </ul>
 		  
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#folderModal"><i class="nav-icon fa fa-plus"></i> افزودن دسته بندی </button>
+			<hr>
+			<a href="<?= site_url('?logout=1') ?>"><button type="button" class="btn btn-warning"><i class="nav-icon fa fa-circle-o text-danger"></i> خروج </button></a>
 		  
         </nav>
         <!-- /.sidebar-menu -->
