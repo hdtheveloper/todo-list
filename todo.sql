@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2025 at 03:04 PM
+-- Generation Time: Jun 15, 2025 at 07:12 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -75,7 +75,7 @@ INSERT INTO `tasks` (`id`, `title`, `user_id`, `folder_id`, `is_done`, `created_
 (36, 'رفتن به کتابخانه', 9, 49, 0, '2025-06-13 19:16:53'),
 (37, 'تدریس زبان', 9, 49, 1, '2025-06-13 19:17:04'),
 (38, 'خرید لوازم منزل', 10, 50, 0, '2025-06-13 19:18:46'),
-(39, 'خرید کتاب', 10, 50, 0, '2025-06-13 19:19:01'),
+(39, 'خرید کتاب', 10, 50, 1, '2025-06-13 19:19:01'),
 (40, 'تعمیر کولر', 10, 51, 0, '2025-06-13 19:19:18'),
 (41, 'تدریس فیزیک', 11, 54, 0, '2025-06-13 19:20:43'),
 (42, 'تدریس برنامه نویسی', 11, 54, 0, '2025-06-13 19:20:51'),
@@ -104,7 +104,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`) VALUES
 (9, 'hassan', 'hassan@gmail.com', '$2y$10$0TPR8UcTyjOwWAGxG1DoKu8r/6okMs4inxmjcSTELYqSkRSHUZpVe', '2025-06-13 09:41:58'),
 (10, 'ali', 'ali@gmail.com', '$2y$10$wjeMh6MLzkf2W3LZA23UceSdQZ/gLhP2eBubxdOLWYHgH1Y54dudm', '2025-06-13 10:52:45'),
-(11, 'admin@gmail.com', 'admin@gmail.com', '$2y$10$J3t3/ap44dlqP8x6MV/avOW3wiIcmaM0yX1Mcbu99JqevcERN1sFG', '2025-06-13 19:19:59');
+(11, 'admin', 'admin@gmail.com', '$2y$10$J3t3/ap44dlqP8x6MV/avOW3wiIcmaM0yX1Mcbu99JqevcERN1sFG', '2025-06-13 19:19:59');
 
 --
 -- Indexes for dumped tables
@@ -137,7 +137,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `folders`
 --
 ALTER TABLE `folders`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `tasks`

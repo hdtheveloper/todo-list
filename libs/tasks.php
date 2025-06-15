@@ -147,3 +147,55 @@ function deleteTask($taskId){
     }
     exit;
 }
+
+function searchTasks(){
+	
+	    $query = $_POST['searchQuery'] ?? '';
+		$folderId = $_POST['folderId'] ?? null;
+
+    global $pdo;
+	
+	$currentUserId = getCurrentUserId();
+	$folder = $_GET['folder_id'] ?? null;
+	$folderCondition = '';
+	if(isset($folder) && is_numeric($folder)){
+		$folderCondition = "and folder_id=$folder";
+	}
+    $sql = "SELECT * FROM tasks WHERE title LIKE :query AND user_id = $currentUserId $folderCondition";
+    $params = [':query' => '%' . $query . '%'];
+
+    if ($folderId) {
+        $sql .= " AND folder_id = :fid";
+        $params[':fid'] = $folderId;
+    }
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    $tasks = $stmt->fetchAll();
+
+    if (count($tasks)) {
+        foreach ($tasks as $task) {
+            ?>
+            <tr>
+              <td><input type="checkbox" data-taskId="<?= $task['id'] ?>" class="isDone" <?= $task['is_done'] ? 'checked' : '' ?>></td>
+              <td><?= $task['title'] ?></td>
+              <td><?= $task['created_at'] ?></td>
+              <td>
+                <a href="?delete_task=<?= $task['id'] ?>" onclick="return confirm('آیا از حذف مطمئن هستید؟');">
+                  <i class="fa fa-trash"></i>
+                </a>
+              </td>
+              <td>
+                <span class="badge <?= $task['is_done'] ? 'badge-success' : 'badge-danger' ?>">
+                  <?= $task['is_done'] ? 'انجام شده' : 'انجام نشده' ?>
+                </span>
+              </td>
+            </tr>
+            <?php
+        }
+    } else {
+        echo '<tr><td colspan="5"><span class="alert alert-warning">تسکی یافت نشد.</span></td></tr>';
+    }
+
+    exit;
+}

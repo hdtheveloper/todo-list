@@ -134,7 +134,7 @@
 
     <!-- Main content -->
     <section class="content">
-      <div class="container-fluid">
+      <div class="container-fluid"> 
         <div class="row">
           <div class="col-12">
             <div class="card">
@@ -142,8 +142,8 @@
 				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#taskModal"><i class="nav-icon fa fa-plus"></i> افزودن تسک جدید </button>
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 250px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="جستجو">
-						
+					<input type="text" name="table_search" id="taskSearchInput" class="form-control float-right" placeholder="جستجو">
+		
                     <div class="input-group-append">
                       <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
                     </div>
@@ -209,15 +209,8 @@
                 </table>
               </div>
               <!-- /.card-body -->
-				<div class="card-footer clearfix">
-					<ul class="pagination pagination-sm mr-5 float-right">
-					  <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-					  <li class="page-item"><a class="page-link" href="#">1</a></li>
-					  <li class="page-item"><a class="page-link" href="#">2</a></li>
-					  <li class="page-item"><a class="page-link" href="#">3</a></li>
-					  <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-					</ul>
-				</div>
+				<div class="card-footer clearfix ">
+
             </div>
             <!-- /.card -->
           </div>
@@ -229,7 +222,7 @@
 
   <!-- /.content-wrapper -->
   <footer class="main-footer">
-    <strong>CopyLeft &copy; 2018 <a href="http://github.com/hesammousavi/">حسن درویشی</a>.</strong>
+    <strong>CopyLeft &copy; 2025 <a href="http://github.com/hesammousavi/">حسن درویشی</a>.</strong>
   </footer>
 
   <!-- Control Sidebar -->
@@ -377,10 +370,29 @@
 			}
 		  });
 		});
+	  
+		/*search with Ajax*/
+		  $('#taskSearchInput').on('input', function() {
+		const query = $(this).val();
+		const folderId = <?= json_encode($_GET['folder_id'] ?? null) ?>;
 
-		
-		
-		
+		$.ajax({
+		  url: 'process/ajaxHandeler.php',
+		  method: 'POST',
+		  data: {
+			action: 'searchTasks',
+			searchQuery: query,
+			folderId: folderId
+		  },
+		  success: function(response) {
+			$('table tbody').html(response);
+		  },
+		  error: function() {
+			alert('خطا در جستجو');
+		  }
+		});
+	  });
+
 		
 	});
 

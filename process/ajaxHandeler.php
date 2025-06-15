@@ -8,7 +8,7 @@ if (!isAjaxRequest()){
 	diePage("درخواست نامعتبر است.");
 }
 if (!isset($_POST['action']) || empty($_POST['action'])){
-	diePage("مسیر ارسال نامعتبر است.");
+	diePage("مسیر ارسال نامعتبر است."); 
 }
 
 switch($_POST['action']){
@@ -40,7 +40,7 @@ switch($_POST['action']){
 	echo addTask($taskTitle, $folderId);
 		
 	break;
-		case 'doneSwitch' : 
+	case 'doneSwitch' : 
 		
 		$taskId = $_POST['taskId'] ?? null;
         $status = $_POST['status'] ?? 0;
@@ -48,11 +48,16 @@ switch($_POST['action']){
 		echo doneSwitch($taskId, $status );
 		
 	break;
-		case 'deleteTask' : 
+	case 'deleteTask' : 
 		
 		$taskId = $_POST['taskId'] ?? null;
 		
 		echo deleteTask($taskId);
+		
+	break;
+	case 'searchTasks' : 
+		
+		echo searchTasks();
 		
 	break;
 
